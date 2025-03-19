@@ -1,10 +1,12 @@
 <script>
-import ButtonComponent from "./shared/ButtonComponent.vue";
+import ButtonComponent from "./controls/ButtonComponent.vue";
+import LogoComponent from "./shared/LogoComponent.vue";
 
 export default {
   name: "HeaderComponent",
   components: {
     ButtonComponent,
+    LogoComponent
   },
   props: {
     headerMenu: {
@@ -32,9 +34,7 @@ export default {
 <template>
   <header class="header">
     <div class="header__container _container _flex _ai-c _jc-sb _gap-x-48">
-      <div class="header__logo _image">
-        <img src="../assets/logo.png" alt="">
-      </div>
+      <LogoComponent class="header__logo" />
       <ul class="header__menu _flex _ai-c _gap-x-32">
         <li v-for="(item, index) in headerMenu" :key="index">
           <a :href="item.url">
@@ -45,7 +45,7 @@ export default {
       <div class="header__search search-header _flex _ai-c">
         <div :class="['search-header__wrapper _flex _ai-c _gap-x-8', isSearchFocused ? '_active' : '',]">
           <span>
-            <img src="../assets/search-icon.svg" alt="">
+            <img src="../assets/icons/search-icon.svg" alt="">
           </span>
           <input
             type="text"

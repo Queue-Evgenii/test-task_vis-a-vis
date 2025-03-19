@@ -1,7 +1,7 @@
 <script>
 import "./assets/reset.css";
 import "./assets/style.scss"
-import LayoutDefault from './layouts/LayoutDefault.vue';
+import LayoutDefault from "./layouts/LayoutDefault.vue";
 
 export default {
   name: "App",
