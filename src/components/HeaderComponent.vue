@@ -11,6 +11,10 @@ export default {
       type: Array,
       default: [],
     },
+    searchValue: {
+      type: String,
+      required: true,
+    }
   },
   data() {
     return {
@@ -50,10 +54,9 @@ export default {
             placeholder="Search Here..."
             @focus="isSearchFocused = true"
             @blur="isSearchFocused = false"
-            :class="[
-              'search-header__input',
-              
-            ]"
+            :value="searchValue"
+            @input="$emit('update:searchValue', $event.target.value)"
+            class="search-header__input"
           >
         </div>
       </div>

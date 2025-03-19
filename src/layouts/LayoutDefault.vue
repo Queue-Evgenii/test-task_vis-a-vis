@@ -12,14 +12,19 @@ export default {
   data() {
     return {
       headerMenu,
+      searchValue: "",
     }
   }
 }
 </script>
 
 <template>
-  <HeaderComponent :headerMenu="headerMenu" />
-  <slot></slot>
+  <HeaderComponent
+    :headerMenu="headerMenu"
+    :searchValue="searchValue"
+    @update:searchValue="value => searchValue = value"
+  />
+  <slot></slot> {{ searchValue }}
   <FooterComponent />
 </template>
 
