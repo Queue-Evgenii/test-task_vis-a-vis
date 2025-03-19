@@ -14,6 +14,7 @@ export default {
     return {
       headerMenu,
       searchValue: "",
+      subscribtionEmail = "",
     }
   }
 }
@@ -26,7 +27,10 @@ export default {
     @update:searchValue="value => searchValue = value"
   />
   <slot></slot> {{ searchValue }}
-  <FooterComponent />
+  <FooterComponent
+    :subscribtionEmail="subscribtionEmail"
+    @update:subscribtionEmail="value => subscribtionEmail = value"
+  />
 </template>
 
 <style lang="scss"></style>

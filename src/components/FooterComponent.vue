@@ -14,6 +14,12 @@ export default {
     ButtonComponent,
     LogoComponent,
   },
+  props: {
+    subscribtionEmail: {
+      type: String,
+      required: true,
+    }
+  },
   data() {
     return {
       homeMenu,
@@ -73,7 +79,14 @@ export default {
           <h3 class="_title-3">Subscribe Cirkle Newsletter</h3>
           <p>Subscribe to be the first one to know about updates. Enter your email</p>
           <div class="footer__input _flex _ai-c">
-            <input type="text" placeholder="Email Address">
+            <input
+              type="text"
+              placeholder="Email Address"
+              name="search"
+              id="search"
+              :value="subscribtionEmail"
+              @input="$emit('update:subscribtionEmail', $event.target.value)"
+            >
             <ButtonComponent>Subscribe</ButtonComponent>
           </div>
         </div>
