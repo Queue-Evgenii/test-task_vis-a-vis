@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap');
 
 html, body {
   font-family: "Inter", sans-serif;;
@@ -25,6 +26,9 @@ html, body {
 
 ._flex {
   display: flex;
+  &._fd-col {
+    flex-direction: column;
+  }
   &._ai-c {
     align-items: center;
   }
@@ -48,6 +52,9 @@ html, body {
   }
   &._gap-x-96 {
     column-gap: 96px;
+  }
+  &._gap-y-32 {
+    row-gap: 32px;
   }
 }
 

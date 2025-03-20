@@ -4,6 +4,7 @@ import "./assets/style.scss"
 import AchievmentsComponent from "./components/AchievmentsComponent.vue";
 
 import ActivitiesComponent from "./components/ActivitiesComponent.vue";
+import OrderFormComponent from "./components/OrderFormComponent.vue";
 import PreviewComponent from "./components/PreviewComponent.vue";
 import LayoutDefault from "./layouts/LayoutDefault.vue";
 
@@ -12,6 +13,7 @@ export default {
   components: {
     LayoutDefault,
     PreviewComponent,
+    OrderFormComponent,
     ActivitiesComponent,
     AchievmentsComponent,
   },
@@ -26,6 +28,7 @@ export default {
 <template>
   <LayoutDefault>
    <PreviewComponent />
+   <OrderFormComponent />
    <ActivitiesComponent />
    <AchievmentsComponent />
   </LayoutDefault>
