@@ -1,6 +1,8 @@
 <script>
 import "./assets/reset.css";
 import "./assets/style.scss"
+
+import ActivitiesComponent from "./components/ActivitiesComponent.vue";
 import PreviewComponent from "./components/PreviewComponent.vue";
 import LayoutDefault from "./layouts/LayoutDefault.vue";
 
@@ -9,6 +11,12 @@ export default {
   components: {
     LayoutDefault,
     PreviewComponent,
+    ActivitiesComponent,
+  },
+  data() {
+    return {
+
+    }
   },
 }
 </script>
@@ -16,6 +24,7 @@ export default {
 <template>
   <LayoutDefault>
    <PreviewComponent />
+   <ActivitiesComponent />
   </LayoutDefault>
 </template>
 
