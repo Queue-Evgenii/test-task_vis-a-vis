@@ -17,6 +17,24 @@ export default {
     errors: {
       type: Array,
       default: [],
+    },
+    delay: {
+      type: Number,
+      default: 0,
+    }
+  },
+  data() {
+    return {
+      timeout: null,
+    }
+  },
+  methods: {
+    debounce(callback) {
+      clearTimeout(this.timeout);
+      this.timeout = setTimeout(callback, this.delay);
+    },
+    handleChange(value) {
+      this.debounce(() => this.$emit('update:value', value));
     }
   }
 }
@@ -37,7 +55,7 @@ export default {
         :id="name"
         :placeholder="placeholder"
         :value="value"
-        @input="$emit('update:value', $event.target.value)"
+        @input="handleChange($event.target.value)"
         class="input-component__input"
       >
     </div>

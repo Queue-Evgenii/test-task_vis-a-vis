@@ -2,6 +2,8 @@
 import ButtonComponent from './controls/ButtonComponent.vue';
 import CheckboxComponent from './controls/CheckboxComponent.vue';
 import InputComponent from './controls/InputComponent.vue';
+import { useForm, useField } from "vee-validate";
+import { reactive, ref, watch } from "vue";
 
 export default {
   name: "OrderFormComponent",
@@ -10,17 +12,69 @@ export default {
     CheckboxComponent,
     ButtonComponent,
   },
-  data() {
-    return {
-      orderData: {
-        first_name: "",
-        last_name: "",
-        sum: "",
-        itn: "",
-        isAgreed: false,
+  setup() {
+    const orderData = reactive({
+      first_name: useField("first_name", (value) => {
+        const errors = [];
+        if (!value) errors.push("Поле обов’язкове");
+        if (!/^[А-Яа-яЁёІіЇїЄєҐґ'’-]+$/.test(value))
+          errors.push("Тільки кирилиця, апостроф та мінус всередині слова");
+        if (!value || value.length < 1 || value.length > 38)
+          errors.push("Не менше 1 та не більше 38 симовлів");
+        return errors;
+      }),
+      last_name: useField("last_name", (value) => {
+        const errors = [];
+        if (!value) errors.push("Поле обов’язкове");
+        if (!/^[А-Яа-яЁёІіЇїЄєҐґ'’-]+$/.test(value))
+          errors.push("Тільки кирилиця, апостроф та мінус всередині слова");
+        if (!value || value.length < 1 || value.length > 38)
+          errors.push("Не менше 1 та не більше 38 симовлів");
+        return errors;
+      }),
+      sum: useField("sum", (value) => {
+        const errors = [];
+        if (!value) return errors;
+        if (!/^\d+$/.test(value)) errors.push("Тільки числа");
+        if (value < 1000 || value > 1000000) errors.push("Сума від 1000 до 1 000 000");
+        return errors;
+      }),
+      itn: useField("itn", (value) => {
+        const errors = [];
+        if (!value) errors.push("Поле обов’язкове");
+        if (!/^\d{8,10}$/.test(value)) errors.push("Тільки цифри (8-10 символів)");
+        return errors;
+      }),
+      isAgreed: useField("isAgreed", (value) => {
+        const errors = [];
+        if (!value) errors.push("Поле обов’язкове");
+        return errors;
+      }),
+    });
+
+    const handleSubmit = async () => {
+      for (const field of Object.values(orderData)) {
+        const res = await field.validate();
+
+        if (res.errors.length > 0) {
+          console.log("Validation failed for:", field);
+          return;
+        }
       }
-    }
-  }
+
+      const formValues = Object.keys(orderData).reduce((acc, key) => {
+        acc[key] = orderData[key].value;
+        return acc;
+      }, {});
+      
+      console.log(formValues);
+    };
+
+    return {
+      orderData,
+      handleSubmit,
+    };
+  },
 }
 </script>
 
@@ -32,33 +86,43 @@ export default {
         <InputComponent
           name="Ім’я"
           placeholder="Введіть ім’я"
-          :value="orderData.first_name"
-          @update:value="value => orderData.first_name = value"
+          :delay="1000"
+          :value="orderData.first_name.value"
+          @update:value="value => orderData.first_name.handleChange(value)"
+          :errors="orderData.first_name.errors"
         />
         <InputComponent
           name="Прізвище"
           placeholder="Введіть прізвище"
-          :value="orderData.last_name"
-          @update:value="value => orderData.last_name = value"
+          :delay="1000"
+          :value="orderData.last_name.value"
+          @update:value="value => orderData.last_name.handleChange(value)"
+          :errors="orderData.last_name.errors"
         />
         <InputComponent
           name="Сума угоди"
           placeholder="Введіть суму угоди"
-          :value="orderData.sum"
-          @update:value="value => orderData.sum = value"
+          :delay="1000"
+          :value="orderData.sum.value"
+          @update:value="value => orderData.sum.handleChange(value)"
+          :errors="orderData.sum.errors"
         />
         <InputComponent
           name="Іпн"
           placeholder="Введіть іпн"
-          :value="orderData.itn"
-          @update:value="value => orderData.itn = value"
+          :delay="1000"
+          :value="orderData.itn.value"
+          @update:value="value => orderData.itn.handleChange(value)"
+          :errors="orderData.itn.errors"
         />
         <CheckboxComponent
           name="Погоджуюсь з правилами та умовами"
-          :value="orderData.isAgreed"
-          @update:value="value => orderData.isAgreed = value"
+          :delay="1000"
+          :value="orderData.isAgreed.value"
+          @update:value="value => orderData.isAgreed.handleChange(value)"
+          :errors="orderData.isAgreed.errors"
         />
-        <ButtonComponent class="_button-1">Відправити</ButtonComponent>
+        <ButtonComponent class="_button-1" @clickHoisting="handleSubmit">Відправити</ButtonComponent>
       </form>
     </div>
   </div>
