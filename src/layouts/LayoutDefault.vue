@@ -14,7 +14,7 @@ export default {
     return {
       headerMenu,
       searchValue: "",
-      subscribtionEmail = "",
+      subscribtionEmail: "",
     }
   }
 }

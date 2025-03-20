@@ -69,6 +69,7 @@ export default {
 
 <style lang="scss">
 .header {
+  background: linear-gradient(311.76deg, #D4E7FE -15.24%, #FFFFFF 78.85%);
   padding: 26px 0;
   border-bottom: 1px solid #e2edfe;
 }

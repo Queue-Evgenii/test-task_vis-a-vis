@@ -4,6 +4,7 @@ html, body {
   font-family: "Inter", sans-serif;;
   font-size: 16px;
   line-height: 1.166;
+  color: #656464;
   @media (max-width: 1920px) {
     font-size: calc((100vw - 1024px)/(1920 - 1024) * (16 - 12) + 12px);
   }
@@ -33,6 +34,9 @@ html, body {
   &._gap-x-8 {
     column-gap: 8px;
   }
+  &._gap-x-16 {
+    column-gap: 16px;
+  }
   &._gap-x-32 {
     column-gap: 32px;
   }
@@ -59,10 +63,12 @@ html, body {
 ._button-1 {
   background-color: #217bf4;
   color: #fff;
+  border: 1px solid transparent;
 }
 ._button-2 {
   background-color: #fff;
   color: #217bf4;
+  border: 1px solid #217bf4;
 }
 
 ._title-1,
