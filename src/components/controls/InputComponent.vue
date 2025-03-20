@@ -50,14 +50,16 @@ export default {
       >
         {{ name }}
       </label>
-      <input
-        type="text"
-        :id="name"
-        :placeholder="placeholder"
-        :value="value"
-        @input="handleChange($event.target.value)"
-        class="input-component__input"
-      >
+      <div class="input-component__container">
+        <input
+          type="text"
+          :id="name"
+          :placeholder="placeholder"
+          :value="value"
+          @input="handleChange($event.target.value)"
+          class="input-component__input"
+        >
+      </div>
     </div>
     <ul v-if="errors.length > 0" class="input-component__errors">
       <li

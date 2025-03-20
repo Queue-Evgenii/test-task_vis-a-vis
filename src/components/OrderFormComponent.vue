@@ -57,7 +57,7 @@ export default {
         const res = await field.validate();
 
         if (res.errors.length > 0) {
-          console.log("Validation failed for:", field);
+          console.log("Invalid", "Validation failed for:", field);
           return;
         }
       }
@@ -67,7 +67,7 @@ export default {
         return acc;
       }, {});
       
-      console.log(formValues);
+      console.log("Valid", formValues);
     };
 
     return {
@@ -122,7 +122,9 @@ export default {
           @update:value="value => orderData.isAgreed.handleChange(value)"
           :errors="orderData.isAgreed.errors"
         />
-        <ButtonComponent class="_button-1" @clickHoisting="handleSubmit">Відправити</ButtonComponent>
+        <div class="form-order__submit">
+          <ButtonComponent class="_button-1" @clickHoisting="handleSubmit">Відправити</ButtonComponent>
+        </div>
       </form>
     </div>
   </div>
@@ -176,18 +178,22 @@ export default {
       padding: 16px;
       border: 1px solid #cccccc;
       border-radius: 8px;
+      width: 100%;
     }
     &._error {
-      .input-component {
-        input {
-          border-color: #eb5757;
-        }
-        input::after {
-          content: '';
+      .input-component__input {
+        border-color: #eb5757;
+      }
+      .input-component__container {
+        position: relative;
+        &::after {
+          content: url("../assets/icons/error.svg");
           display: inline-block;
+          position: absolute;
           width: 24px;
           height: 24px;
-          background: url("../assets/icons/error.svg");
+          top: calc(50% - 12px);
+          right: 12px;
         }
       }
     }
@@ -198,6 +204,10 @@ export default {
       align-items: center;
       column-gap: 8px;
     }
+  }
+  &__submit {
+    margin: 0 auto;
+    max-width: 172px;
   }
 }
 </style>
